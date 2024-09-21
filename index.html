@@ -9,395 +9,295 @@
 <body>
     <h1>Jeu de Blackjack - Cartes</h1>
 
-
     <div id="game">
         <div id="dealer-hand" class="hand">
-            <h2>Dealer's Hand</h2>
+            <h2>Cartes du Croupier</h2>
         </div>
         <div id="player-hand" class="hand">
-            <h2>Player's Hand</h2>
+            <h2>Cartes du Joueur</h2>
         </div>
-        <button id="hit">Hit</button>
-        <button id="stand">Stand</button>
+        <button id="start-button">Jouer </button>
+        <button id="hit">Tirer</button>
+        <button id="stand">Rester</button>
+        <button id="restart">Redémarrer</button>
         <div id="message"></div>
+
+
+        
     </div>
 
-    <!-- Cards deck-->
-    <div id="Deck">
-        <!-- Hearts -->
-        <div class="card hearts">
-            <div class="value top-left">A</div>
-            <div class="center multiple">
-                <span>♥</span>
-            </div>
-            <div class="value bottom-right">A</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">2</div>
-            <div class="center multiple">
-                <span>♥</span><span>♥</span>
-            </div>
-            <div class="value bottom-right">2</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">3</div>
-            <div class="center multiple">
-                <span>♥</span><span>♥</span><span>♥</span>
-            </div>
-            <div class="value bottom-right">3</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">4</div>
-            <div class="center multiple">
-                <span>♥</span><span>♥</span><span>♥</span><span>♥</span>
-            </div>
-            <div class="value bottom-right">4</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">5</div>
-            <div class="center multiple">
-                <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
-            </div>
-            <div class="value bottom-right">5</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">6</div>
-            <div class="center multiple">
-                <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
-            </div>
-            <div class="value bottom-right">6</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">7</div>
-            <div class="center multiple">
-                <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
-            </div>
-            <div class="value bottom-right">7</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">8</div>
-            <div class="center multiple">
-                <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
-            </div>
-            <div class="value bottom-right">8</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">9</div>
-            <div class="center multiple">
-                <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
-            </div>
-            <div class="value bottom-right">9</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">10</div>
-            <div class="center multiple">
-                <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
-            </div>
-            <div class="value bottom-right">10</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">J</div>
-            <div class="center multiple">
-                <span>♥</span>
-            </div>
-            <div class="value bottom-right">J</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">Q</div>
-            <div class="center multiple">
-                <span>♥</span>
-            </div>
-            <div class="value bottom-right">Q</div>
-        </div>
-        <div class="card hearts">
-            <div class="value top-left">K</div>
-            <div class="center multiple">
-                <span>♥</span>
-            </div>
-            <div class="value bottom-right">K</div>
-        </div>
 
-        <!-- Spades -->
-        <div class="card spades">
-            <div class="value top-left">A</div>
-            <div class="center multiple">
-                <span>♠</span>
-            </div>
-            <div class="value bottom-right">A</div>
+    <div id="Deck" class="deck">
+        <!-- Cartes de cœur (hearts) -->
+        <div class="card hearts" data-value="A" data-suit="hearts">
+            <div class="value top-left">A♥</div>
+            <div class="center multiple"><span>♥</span></div>
+            <div class="value bottom-right">A♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">2</div>
-            <div class="center multiple">
-                <span>♠</span><span>♠</span>
-            </div>
-            <div class="value bottom-right">2</div>
+        <div class="card hearts" data-value="2" data-suit="hearts">
+            <div class="value top-left">2♥</div>
+            <div class="center multiple"><span>♥</span><span>♥</span></div>
+            <div class="value bottom-right">2♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">3</div>
-            <div class="center multiple">
-                <span>♠</span><span>♠</span><span>♠</span>
-            </div>
-            <div class="value bottom-right">3</div>
+        <div class="card hearts" data-value="3" data-suit="hearts">
+            <div class="value top-left">3♥</div>
+            <div class="center multiple"><span>♥</span><span>♥</span><span>♥</span></div>
+            <div class="value bottom-right">3♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">4</div>
-            <div class="center multiple">
-                <span>♠</span><span>♠</span><span>♠</span><span>♠</span>
-            </div>
-            <div class="value bottom-right">4</div>
+        <div class="card hearts" data-value="4" data-suit="hearts">
+            <div class="value top-left">4♥</div>
+            <div class="center multiple"><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
+            <div class="value bottom-right">4♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">5</div>
-            <div class="center multiple">
-                <span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span>
-            </div>
-            <div class="value bottom-right">5</div>
+        <div class="card hearts" data-value="5" data-suit="hearts">
+            <div class="value top-left">5♥</div>
+            <div class="center multiple"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
+            <div class="value bottom-right">5♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">6</div>
-            <div class="center multiple">
-                <span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span>
-            </div>
-            <div class="value bottom-right">6</div>
+        <div class="card hearts" data-value="6" data-suit="hearts">
+            <div class="value top-left">6♥</div>
+            <div class="center multiple"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
+            <div class="value bottom-right">6♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">7</div>
-            <div class="center multiple">
-                <span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span>
-            </div>
-            <div class="value bottom-right">7</div>
+        <div class="card hearts" data-value="7" data-suit="hearts">
+            <div class="value top-left">7♥</div>
+            <div class="center multiple"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
+            <div class="value bottom-right">7♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">8</div>
-            <div class="center multiple">
-                <span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span>
-            </div>
-            <div class="value bottom-right">8</div>
+        <div class="card hearts" data-value="8" data-suit="hearts">
+            <div class="value top-left">8♥</div>
+            <div class="center multiple"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
+            <div class="value bottom-right">8♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">9</div>
-            <div class="center multiple">
-                <span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span>
-            </div>
-            <div class="value bottom-right">9</div>
+        <div class="card hearts" data-value="9" data-suit="hearts">
+            <div class="value top-left">9♥</div>
+            <div class="center multiple"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
+            <div class="value bottom-right">9♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">10</div>
-            <div class="center multiple">
-                <span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span>
-            </div>
-            <div class="value bottom-right">10</div>
+        <div class="card hearts" data-value="10" data-suit="hearts">
+            <div class="value top-left">10♥</div>
+            <div class="center multiple"><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span></div>
+            <div class="value bottom-right">10♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">J</div>
-            <div class="center multiple">
-                <span>♠</span>
-            </div>
-            <div class="value bottom-right">J</div>
+        <div class="card hearts" data-value="J" data-suit="hearts">
+            <div class="value top-left">J♥</div>
+            <div class="center multiple"><span>J</span></div>
+            <div class="value bottom-right">J♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">Q</div>
-            <div class="center multiple">
-                <span>♠</span>
-            </div>
-            <div class="value bottom-right">Q</div>
+        <div class="card hearts" data-value="Q" data-suit="hearts">
+            <div class="value top-left">Q♥</div>
+            <div class="center multiple"><span>Q</span></div>
+            <div class="value bottom-right">Q♥</div>
         </div>
-        <div class="card spades">
-            <div class="value top-left">K</div>
-            <div class="center multiple">
-                <span>♠</span>
-            </div>
-            <div class="value bottom-right">K</div>
+        <div class="card hearts" data-value="K" data-suit="hearts">
+            <div class="value top-left">K♥</div>
+            <div class="center multiple"><span>K</span></div>
+            <div class="value bottom-right">K♥</div>
         </div>
-
-        <!-- Clubs -->
-        <div class="card clubs">
-            <div class="value top-left">A</div>
-            <div class="center multiple">
-                <span>♣</span>
-            </div>
-            <div class="value bottom-right">A</div>
+    
+        <!-- Cartes de pique (spades) -->
+        <div class="card spades" data-value="A" data-suit="spades">
+            <div class="value top-left">A♠</div>
+            <div class="center multiple"><span>♠</span></div>
+            <div class="value bottom-right">A♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">2</div>
-            <div class="center multiple">
-                <span>♣</span><span>♣</span>
-            </div>
-            <div class="value bottom-right">2</div>
+        <div class="card spades" data-value="2" data-suit="spades">
+            <div class="value top-left">2♠</div>
+            <div class="center multiple"><span>♠</span><span>♠</span></div>
+            <div class="value bottom-right">2♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">3</div>
-            <div class="center multiple">
-                <span>♣</span><span>♣</span><span>♣</span>
-            </div>
-            <div class="value bottom-right">3</div>
+        <div class="card spades" data-value="3" data-suit="spades">
+            <div class="value top-left">3♠</div>
+            <div class="center multiple"><span>♠</span><span>♠</span><span>♠</span></div>
+            <div class="value bottom-right">3♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">4</div>
-            <div class="center multiple">
-                <span>♣</span><span>♣</span><span>♣</span><span>♣</span>
-            </div>
-            <div class="value bottom-right">4</div>
+        <div class="card spades" data-value="4" data-suit="spades">
+            <div class="value top-left">4♠</div>
+            <div class="center multiple"><span>♠</span><span>♠</span><span>♠</span><span>♠</span></div>
+            <div class="value bottom-right">4♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">5</div>
-            <div class="center multiple">
-                <span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span>
-            </div>
-            <div class="value bottom-right">5</div>
+        <div class="card spades" data-value="5" data-suit="spades">
+            <div class="value top-left">5♠</div>
+            <div class="center multiple"><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span></div>
+            <div class="value bottom-right">5♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">6</div>
-            <div class="center multiple">
-                <span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span>
-            </div>
-            <div class="value bottom-right">6</div>
+        <div class="card spades" data-value="6" data-suit="spades">
+            <div class="value top-left">6♠</div>
+            <div class="center multiple"><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span></div>
+            <div class="value bottom-right">6♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">7</div>
-            <div class="center multiple">
-                <span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span>
-            </div>
-            <div class="value bottom-right">7</div>
+        <div class="card spades" data-value="7" data-suit="spades">
+            <div class="value top-left">7♠</div>
+            <div class="center multiple"><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span></div>
+            <div class="value bottom-right">7♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">8</div>
-            <div class="center multiple">
-                <span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span>
-            </div>
-            <div class="value bottom-right">8</div>
+        <div class="card spades" data-value="8" data-suit="spades">
+            <div class="value top-left">8♠</div>
+            <div class="center multiple"><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span></div>
+            <div class="value bottom-right">8♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">9</div>
-            <div class="center multiple">
-                <span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span>
-            </div>
-            <div class="value bottom-right">9</div>
+        <div class="card spades" data-value="9" data-suit="spades">
+            <div class="value top-left">9♠</div>
+            <div class="center multiple"><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span></div>
+            <div class="value bottom-right">9♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">10</div>
-            <div class="center multiple">
-                <span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span>
-            </div>
-            <div class="value bottom-right">10</div>
+        <div class="card spades" data-value="10" data-suit="spades">
+            <div class="value top-left">10♠</div>
+            <div class="center multiple"><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span><span>♠</span></div>
+            <div class="value bottom-right">10♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">J</div>
-            <div class="center multiple">
-                <span>♣</span>
-            </div>
-            <div class="value bottom-right">J</div>
+        <div class="card spades" data-value="J" data-suit="spades">
+            <div class="value top-left">J♠</div>
+            <div class="center multiple"><span>J</span></div>
+            <div class="value bottom-right">J♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">Q</div>
-            <div class="center multiple">
-                <span>♣</span>
-            </div>
-            <div class="value bottom-right">Q</div>
+        <div class="card spades" data-value="Q" data-suit="spades">
+            <div class="value top-left">Q♠</div>
+            <div class="center multiple"><span>Q</span></div>
+            <div class="value bottom-right">Q♠</div>
         </div>
-        <div class="card clubs">
-            <div class="value top-left">K</div>
-            <div class="center multiple">
-                <span>♣</span>
-            </div>
-            <div class="value bottom-right">K</div>
+        <div class="card spades" data-value="K" data-suit="spades">
+            <div class="value top-left">K♠</div>
+            <div class="center multiple"><span>K</span></div>
+            <div class="value bottom-right">K♠</div>
         </div>
-
-        <!-- Diamonds -->
-        <div class="card diamonds">
-            <div class="value top-left">A</div>
-            <div class="center multiple">
-                <span>♦</span>
-            </div>
-            <div class="value bottom-right">A</div>
+    
+        <!-- Cartes de carreau (diamonds) -->
+        <div class="card diamonds" data-value="A" data-suit="diamonds">
+            <div class="value top-left">A♦</div>
+            <div class="center multiple"><span>♦</span></div>
+            <div class="value bottom-right">A♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">2</div>
-            <div class="center multiple">
-                <span>♦</span><span>♦</span>
-            </div>
-            <div class="value bottom-right">2</div>
+        <div class="card diamonds" data-value="2" data-suit="diamonds">
+            <div class="value top-left">2♦</div>
+            <div class="center multiple"><span>♦</span><span>♦</span></div>
+            <div class="value bottom-right">2♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">3</div>
-            <div class="center multiple">
-                <span>♦</span><span>♦</span><span>♦</span>
-            </div>
-            <div class="value bottom-right">3</div>
+        <div class="card diamonds" data-value="3" data-suit="diamonds">
+            <div class="value top-left">3♦</div>
+            <div class="center multiple"><span>♦</span><span>♦</span><span>♦</span></div>
+            <div class="value bottom-right">3♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">4</div>
-            <div class="center multiple">
-                <span>♦</span><span>♦</span><span>♦</span><span>♦</span>
-            </div>
-            <div class="value bottom-right">4</div>
+        <div class="card diamonds" data-value="4" data-suit="diamonds">
+            <div class="value top-left">4♦</div>
+            <div class="center multiple"><span>♦</span><span>♦</span><span>♦</span><span>♦</span></div>
+            <div class="value bottom-right">4♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">5</div>
-            <div class="center multiple">
-                <span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span>
-            </div>
-            <div class="value bottom-right">5</div>
+        <div class="card diamonds" data-value="5" data-suit="diamonds">
+            <div class="value top-left">5♦</div>
+            <div class="center multiple"><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span></div>
+            <div class="value bottom-right">5♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">6</div>
-            <div class="center multiple">
-                <span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span>
-            </div>
-            <div class="value bottom-right">6</div>
+        <div class="card diamonds" data-value="6" data-suit="diamonds">
+            <div class="value top-left">6♦</div>
+            <div class="center multiple"><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span></div>
+            <div class="value bottom-right">6♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">7</div>
-            <div class="center multiple">
-                <span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span>
-            </div>
-            <div class="value bottom-right">7</div>
+        <div class="card diamonds" data-value="7" data-suit="diamonds">
+            <div class="value top-left">7♦</div>
+            <div class="center multiple"><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span></div>
+            <div class="value bottom-right">7♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">8</div>
-            <div class="center multiple">
-                <span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span>
-            </div>
-            <div class="value bottom-right">8</div>
+        <div class="card diamonds" data-value="8" data-suit="diamonds">
+            <div class="value top-left">8♦</div>
+            <div class="center multiple"><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span></div>
+            <div class="value bottom-right">8♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">9</div>
-            <div class="center multiple">
-                <span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span>
-            </div>
-            <div class="value bottom-right">9</div>
+        <div class="card diamonds" data-value="9" data-suit="diamonds">
+            <div class="value top-left">9♦</div>
+            <div class="center multiple"><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span></div>
+            <div class="value bottom-right">9♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">10</div>
-            <div class="center multiple">
-                <span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span>
-            </div>
-            <div class="value bottom-right">10</div>
+        <div class="card diamonds" data-value="10" data-suit="diamonds">
+            <div class="value top-left">10♦</div>
+            <div class="center multiple"><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span><span>♦</span></div>
+            <div class="value bottom-right">10♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">J</div>
-            <div class="center multiple">
-                <span>♦</span>
-            </div>
-            <div class="value bottom-right">J</div>
+        <div class="card diamonds" data-value="J" data-suit="diamonds">
+            <div class="value top-left">J♦</div>
+            <div class="center multiple"><span>J</span></div>
+            <div class="value bottom-right">J♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">Q</div>
-            <div class="center multiple">
-                <span>♦</span>
-            </div>
-            <div class="value bottom-right">Q</div>
+        <div class="card diamonds" data-value="Q" data-suit="diamonds">
+            <div class="value top-left">Q♦</div>
+            <div class="center multiple"><span>Q</span></div>
+            <div class="value bottom-right">Q♦</div>
         </div>
-        <div class="card diamonds">
-            <div class="value top-left">K</div>
-            <div class="center multiple">
-                <span>♦</span>
-            </div>
-            <div class="value bottom-right">K</div>
+        <div class="card diamonds" data-value="K" data-suit="diamonds">
+            <div class="value top-left">K♦</div>
+            <div class="center multiple"><span>K</span></div>
+            <div class="value bottom-right">K♦</div>
         </div>
-
-        <!-- Carte dos -->
-        <div class="card card-back"></div>
+    
+        <!-- Cartes de trèfle (clubs) -->
+        <div class="card clubs" data-value="A" data-suit="clubs">
+            <div class="value top-left">A♣</div>
+            <div class="center multiple"><span>♣</span></div>
+            <div class="value bottom-right">A♣</div>
+        </div>
+        <div class="card clubs" data-value="2" data-suit="clubs">
+            <div class="value top-left">2♣</div>
+            <div class="center multiple"><span>♣</span><span>♣</span></div>
+            <div class="value bottom-right">2♣</div>
+        </div>
+        <div class="card clubs" data-value="3" data-suit="clubs">
+            <div class="value top-left">3♣</div>
+            <div class="center multiple"><span>♣</span><span>♣</span><span>♣</span></div>
+            <div class="value bottom-right">3♣</div>
+        </div>
+        <div class="card clubs" data-value="4" data-suit="clubs">
+            <div class="value top-left">4♣</div>
+            <div class="center multiple"><span>♣</span><span>♣</span><span>♣</span><span>♣</span></div>
+            <div class="value bottom-right">4♣</div>
+        </div>
+        <div class="card clubs" data-value="5" data-suit="clubs">
+            <div class="value top-left">5♣</div>
+            <div class="center multiple"><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span></div>
+            <div class="value bottom-right">5♣</div>
+        </div>
+        <div class="card clubs" data-value="6" data-suit="clubs">
+            <div class="value top-left">6♣</div>
+            <div class="center multiple"><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span></div>
+            <div class="value bottom-right">6♣</div>
+        </div>
+        <div class="card clubs" data-value="7" data-suit="clubs">
+            <div class="value top-left">7♣</div>
+            <div class="center multiple"><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span></div>
+            <div class="value bottom-right">7♣</div>
+        </div>
+        <div class="card clubs" data-value="8" data-suit="clubs">
+            <div class="value top-left">8♣</div>
+            <div class="center multiple"><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span></div>
+            <div class="value bottom-right">8♣</div>
+        </div>
+        <div class="card clubs" data-value="9" data-suit="clubs">
+            <div class="value top-left">9♣</div>
+            <div class="center multiple"><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span></div>
+            <div class="value bottom-right">9♣</div>
+        </div>
+        <div class="card clubs" data-value="10" data-suit="clubs">
+            <div class="value top-left">10♣</div>
+            <div class="center multiple"><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span><span>♣</span></div>
+            <div class="value bottom-right">10♣</div>
+        </div>
+        <div class="card clubs" data-value="J" data-suit="clubs">
+            <div class="value top-left">J♣</div>
+            <div class="center multiple"><span>J</span></div>
+            <div class="value bottom-right">J♣</div>
+        </div>
+        <div class="card clubs" data-value="Q" data-suit="clubs">
+            <div class="value top-left">Q♣</div>
+            <div class="center multiple"><span>Q</span></div>
+            <div class="value bottom-right">Q♣</div>
+        </div>
+        <div class="card clubs" data-value="K" data-suit="clubs">
+            <div class="value top-left">K♣</div>
+            <div class="center multiple"><span>K</span></div>
+            <div class="value bottom-right">K♣</div>
+        </div>
+    
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
