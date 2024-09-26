@@ -1,4 +1,4 @@
-.card {
+.card, .card.hidden {
     width: 120px;
     height: 180px;
     background-color: white;
@@ -13,13 +13,25 @@
     font-family: 'Arial', sans-serif;
     color: black;
     margin: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card.hidden {
+    width: 130px;
+    height: 190px;
+    background-color: #1E3A5F;
+    background-image: linear-gradient(45deg, #1E3A5F 25%, #234974 25%, #234974 50%, #1E3A5F 50%, #1E3A5F 75%, #234974 75%, #234974);
+    background-size: 20px 20px;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .card .value {
     position: absolute;
     font-size: 18px;
     font-weight: bold;
-    color: black;
 }
 
 .card .top-left {
@@ -50,63 +62,52 @@
     margin: 2px;
 }
 
-/* Couleurs pour les cartes */
-.card.hearts .value,
-.card.hearts .center,
-.card.diamonds .value,
-.card.diamonds .center {
+.card.hearts .value, .card.hearts .center,
+.card.diamonds .value, .card.diamonds .center {
     color: red;
 }
 
-.card.hidden {
-    width: 130px;
-    height: 190px;
-    background-color: #1E3A5F; 
-    border-radius: 10px;
-    border: 1px solid black;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    background-image: linear-gradient(45deg, #1E3A5F 25%, #234974 25%, #234974 50%, #1E3A5F 50%, #1E3A5F 75%, #234974 75%, #234974);
-    background-size: 20px 20px;
-}
-
-#game {
+#game, .main, .deck {
     text-align: center;
     margin-top: 20px;
 }
 
-.hand {
+.main {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    padding: 20px;
+}
+
+.deck {
+    border: 10px solid white;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 5px;
+    background-color: #200303;
+    padding: 20px;
 }
 
 button {
     margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
+    color: white;
+    border: 5px solid rgb(27, 11, 11);
+    border-radius: 30px;
+    font-weight: bold;
+    background-color: rgb(107, 37, 37);
 }
 
 #message {
-    font-size: 20px;
+    font-size: 60px;
     font-weight: bold;
     color: red;
     margin-top: 20px;
 }
 
-body{
-    color: rgb(255, 255, 255);
-
+body {
+    color: white;
     background-color: #192e26;
 }
-
-
-.deck {
-    border: 10px solid white;
-    border-radius: 20px;
-    margin-top: 200px ;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr); /* 13 colonnes pour 13 cartes par rangée */
-    gap: 5px; /* Espacement entre les cartes */
-    background-color: #200303;
-}
-
