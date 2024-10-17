@@ -79,6 +79,26 @@ const cartes = document.querySelectorAll('.card');
 let deck = new Deck(cartes);
 let joueur = new Joueur();
 let croupier = new Joueur();
+let soldeJoueur = 1000; 
+let mise = 0;
+
+function placerMise() {
+    const miseInput = document.getElementById('mise');
+    const montantMise = parseInt(miseInput.value);
+
+    if (montantMise > 0 && montantMise <= soldeJoueur) {
+        mise = montantMise;
+        soldeJoueur -= mise; // Déduire la mise du solde
+        document.getElementById('solde').innerText = soldeJoueur; // Mettre à jour l'affichage du solde
+        document.getElementById('mise-courante').innerText = mise; // Mettre à jour l'affichage de la mise courante
+        demarrerJeu(); // Démarrer le jeu
+    } else {
+        alert("La mise doit être supérieure à 0 et inférieure ou égale à votre solde.");
+    }
+}
+
+
+
 
 function afficherMains() {
     joueur.afficherMain('main-joueur');
@@ -128,14 +148,32 @@ function determinerVainqueur() {
 
     if (valeurCroupier > 21) {
         afficherMessage("Le croupier a dépassé 21. Vous gagnez !");
+        soldeJoueur += mise * 2; // Gagner double mise
     } else if (valeurJoueur > valeurCroupier) {
         afficherMessage("Vous gagnez !");
+        soldeJoueur += mise * 2; // Gagner double mise
     } else if (valeurJoueur === valeurCroupier) {
         afficherMessage("Égalité !");
+        soldeJoueur += mise; // Remboursement de la mise
     } else {
         afficherMessage("Le croupier gagne !");
+        soldeJoueur -= mise; // Perdre la mise
+    }
+
+    // Réinitialiser la mise courante après la partie
+    mise = 0; 
+    document.getElementById('mise-courante').innerText = mise; // Mettre à jour l'affichage de la mise courante
+    
+    document.getElementById('solde').innerText = soldeJoueur; // Mettre à jour l'affichage du solde
+    
+    // Vérifier si le joueur a de l'argent pour continuer
+    if (soldeJoueur <= 0) {
+        afficherMessage("Vous n'avez plus d'argent pour jouer !");
+        document.getElementById('tirer').disabled = true; // Désactiver le bouton de tirage
     }
 }
+
+
 
 function afficherValeur() {
     const totalJoueur = joueur.calculerValeur();  // Calculer la valeur de la main du joueur
@@ -150,11 +188,18 @@ function afficherMessage(message) {
 }
 
 function redemarrer() {
+    if (soldeJoueur <= 0) {
+        soldeJoueur = 1000; // Réinitialiser le solde à 1000 unités
+        document.getElementById('solde').innerText = soldeJoueur; // Mettre à jour l'affichage du solde
+    }
+    
     joueur = new Joueur();
     croupier = new Joueur();
     document.getElementById('message').innerText = '';
+    document.getElementById('tirer').disabled = false; // Réactiver le bouton de tirage
     demarrerJeu();
 }
+
 
 function demarrerJeu() {
     deck = new Deck(cartes);
@@ -167,8 +212,14 @@ function demarrerJeu() {
     afficherValeur();
 }
 
+
+
+
+
 document.getElementById('tirer').addEventListener('click', tirerCarte);
 document.getElementById('arreter').addEventListener('click', arreter);
 document.getElementById('redemarrer').addEventListener('click', redemarrer);
+document.getElementById('placer-mise').addEventListener('click', placerMise);
 
-demarrerJeu();
+
+

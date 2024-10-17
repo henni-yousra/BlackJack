@@ -119,3 +119,14 @@ body {
     color: white;
     background-color: #192e26;
 }
+
+
+input[type="number"]#mise {
+    width: 100px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+  
