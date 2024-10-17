@@ -1,114 +1,174 @@
-// Créer le paquet des cartes en utilisant les cartes de HTML/CSS
-const cartes = Array.from(document.querySelectorAll('.card')); 
-// Cela va sélectionner tous les éléments de classe "card"
-
-let tableDeJeu = [];
-let deckMelange = [];
-
-// Fonction dédiée à mélanger le deck des cartes 
-function melangerDeck() {
-    const melange = [...cartes]; // Mettre le tableau des cartes dans une variable à manipuler
-    for (let i = melange.length - 1; i > 0; i--) {
-        // De la fin au début, on fait le parcours et à chaque fois on substitue avec une carte aléatoire (algo Fisher-Yates)
-        const j = Math.floor(Math.random() * (i + 1));
-        [melange[i], melange[j]] = [melange[j], melange[i]];
+/*this is the same as the class
+function Deck(){
+}
+Deck.prototype.draw = () => {
     }
-    return melange;
-}
+*/
 
-// Après le shuffle, on attribue les cartes 
-function distribuerCarte() {
-    if (deckMelange.length === 0) {
-        alert("Le paquet est vide !");
-        return null;
+class Deck {
+    constructor(cartes) {
+        this.cartes = Array.from(cartes);
+        this.melange = [];
     }
-    return deckMelange.pop(); // Récupérer le dernier élément dans le tableau (stack)
+
+    melanger() {
+        this.melange = [...this.cartes];
+        for (let i = this.melange.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.melange[i], this.melange[j]] = [this.melange[j], this.melange[i]];
+        }
+    }
+
+    distribuerCarte() {
+        if (this.melange.length === 0) {
+            alert("Le paquet est vide !");
+            return null;
+        }
+        return this.melange.pop();
+    }
 }
 
-// Fonction pour mettre à jour l'affichage
-function Affichage() {
-    const divJoueur = document.getElementById('main-joueur');
-    divJoueur.innerHTML = ''; // Clear previous cards
+class Joueur {
+    constructor() {
+        this.main = [];
+        this.carteCachee = true;
+    }
 
-    tableDeJeu.forEach(carte => {
-        carte.style.display = 'flex'; // Show the card
-        divJoueur.appendChild(carte); // Add the card to the player's hand
-    });
+    ajouterCarte(carte) {
+        this.main.push(carte);
+    }
 
-    // Mettre à jour la valeur totale de la main
-    const totalValue = calculerValeurMain(tableDeJeu);
-    afficherValeur(totalValue);
+    calculerValeur() {
+        let valeur = 0;
+        let nombreAs = 0;
+
+        this.main.forEach(carte => {
+            const valeurCarte = carte.getAttribute('data-value');
+            if (['J', 'Q', 'K'].includes(valeurCarte)) {
+                valeur += 10;
+            } else if (valeurCarte === 'A') {
+                nombreAs++;
+                valeur += 11;
+            } else {
+                valeur += parseInt(valeurCarte);
+            }
+        });
+
+        while (valeur > 21 && nombreAs > 0) {
+            valeur -= 10;
+            nombreAs--;
+        }
+
+        return valeur;
+    }
+
+    afficherMain(divId, montrerCarteCachee = true) {
+        const divMain = document.getElementById(divId);
+        divMain.innerHTML = this.main.map((carte, index) => {
+            // Cacher la deuxième carte si c'est le croupier et la carte doit être cachée
+            if (index === 1 && !montrerCarteCachee && this.carteCachee) {
+                return '<div class="card back"></div>'; // Affiche le dos de la carte
+            }
+            carte.style.display = 'flex';
+            return carte.outerHTML;
+        }).join('');
+    }
 }
 
-// Fonction pour démarrer le jeu 
-function demarrerJeu() {
-    // Mélanger le deck à chaque nouvelle partie
-    deckMelange = melangerDeck(); 
-    // Commencer par distribuer deux cartes
-    tableDeJeu = [distribuerCarte(), distribuerCarte()];
-    Affichage(); // Mise à jour de l'interface
+const cartes = document.querySelectorAll('.card');
+let deck = new Deck(cartes);
+let joueur = new Joueur();
+let croupier = new Joueur();
+
+function afficherMains() {
+    joueur.afficherMain('main-joueur');
+    croupier.afficherMain('main-croupier', false);  // Cache la deuxième carte du croupier
 }
 
-// Fonction pour tirer une carte supplémentaire
+function arreter() {
+    croupier.carteCachee = false;  // Révèle la carte cachée
+    afficherMains();
+    tourCroupier();
+}
+
+
 function tirerCarte() {
-    const carte = distribuerCarte();
-    if (carte) { // Si le paquet n'est pas vide
-        tableDeJeu.push(carte);
-        Affichage();
-        // Vérifier si le joueur a dépassé 21
-        const totalValue = calculerValeurMain(tableDeJeu);
-        if (totalValue > 21) {
-            afficherMessage("Vous avez dépassé 21 !");
+    const carte = deck.distribuerCarte();
+    if (carte) {
+        joueur.ajouterCarte(carte);
+        afficherMains();
+
+        afficherValeur(); 
+
+        const totalJoueur = joueur.calculerValeur();
+        if (totalJoueur > 21) {
+            afficherMessage("Vous avez dépassé 21. Vous avez perdu !");
         }
     }
 }
 
-// Calculer la valeur de la main du joueur
-function calculerValeurMain(main) {
-    let valeur = 0;
-    let nombreAs = 0; 
+function tourCroupier() {
+    let valeurCroupier = croupier.calculerValeur();
 
-    main.forEach(carte => {
-        const valeurCarte = carte.dataset.value; // Assurez-vous que chaque carte a un data-value
-        if (['J', 'Q', 'K'].includes(valeurCarte)) {
-            valeur += 10;
-        } else if (valeurCarte === 'A') {
-            nombreAs++;
-            valeur += 11;
-        } else {
-            valeur += parseInt(valeurCarte);
+    while (valeurCroupier < 17) {
+        const carte = deck.distribuerCarte();
+        if (carte) {
+            croupier.ajouterCarte(carte);
+            afficherMains();
+            valeurCroupier = croupier.calculerValeur();
         }
-    });
-
-    // Ajuster la valeur des As si nécessaire
-    while (valeur > 21 && nombreAs > 0) {
-        valeur -= 10; // Le As devient 1 au lieu de 11
-        nombreAs--;
     }
 
-    return valeur;
+    determinerVainqueur();
 }
 
-// Fonction pour afficher la valeur de la main
-function afficherValeur(valeur) {
-    const divValeur = document.getElementById('valeur-main');
-    divValeur.innerText = `Valeur totale de la main : ${valeur}`;
+function determinerVainqueur() {
+    const valeurJoueur = joueur.calculerValeur();
+    const valeurCroupier = croupier.calculerValeur();
+
+    if (valeurCroupier > 21) {
+        afficherMessage("Le croupier a dépassé 21. Vous gagnez !");
+    } else if (valeurJoueur > valeurCroupier) {
+        afficherMessage("Vous gagnez !");
+    } else if (valeurJoueur === valeurCroupier) {
+        afficherMessage("Égalité !");
+    } else {
+        afficherMessage("Le croupier gagne !");
+    }
 }
 
-// Fonction pour redémarrer le jeu 
-function redemarrer() {
-    tableDeJeu = []; // Réinitialiser la main du joueur
-    document.getElementById('message').innerText = ''; // Réinitialiser les messages
-    demarrerJeu(); // Relancer le jeu
+function afficherValeur() {
+    const totalJoueur = joueur.calculerValeur();  // Calculer la valeur de la main du joueur
+    const divValeur = document.getElementById('valeur');
+    divValeur.innerText = `Valeur totale de la main : ${totalJoueur}`;  // Afficher la valeur calculée
 }
 
-// Fonction pour afficher un message 
+
 function afficherMessage(message) {
-    const divMsg = document.getElementById('message');
-    divMsg.innerText = message;
+    const divMessage = document.getElementById('message');
+    divMessage.innerText = message;
 }
 
-// Ajouter des écouteurs d'événements pour les boutons
-document.getElementById('demarrerJeu').addEventListener('click', demarrerJeu);
+function redemarrer() {
+    joueur = new Joueur();
+    croupier = new Joueur();
+    document.getElementById('message').innerText = '';
+    demarrerJeu();
+}
+
+function demarrerJeu() {
+    deck = new Deck(cartes);
+    deck.melanger();
+    joueur.ajouterCarte(deck.distribuerCarte());
+    joueur.ajouterCarte(deck.distribuerCarte());
+    croupier.ajouterCarte(deck.distribuerCarte());
+    croupier.ajouterCarte(deck.distribuerCarte());
+    afficherMains();
+    afficherValeur();
+}
+
 document.getElementById('tirer').addEventListener('click', tirerCarte);
+document.getElementById('arreter').addEventListener('click', arreter);
 document.getElementById('redemarrer').addEventListener('click', redemarrer);
+
+demarrerJeu();

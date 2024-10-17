@@ -1,17 +1,16 @@
+
 #deck {
-    display: none; 
+    display: none;
 }
 
 
-.card, .card.hidden {
-    display: none; /* All cards are hidden initially */
+.card {
     width: 120px;
     height: 180px;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -22,18 +21,15 @@
     transition: transform 0.2s ease-in-out;
 }
 
-.card.hidden {
-    width: 130px;
-    height: 190px;
+.card.back {
     background-color: #1E3A5F;
-    background-image: linear-gradient(45deg, #1E3A5F 25%, #234974 25%, #234974 50%, #1E3A5F 50%, #1E3A5F 75%, #234974 75%, #234974);
-    background-size: 20px 20px;
 }
 
 .card:hover {
     transform: scale(1.05);
 }
 
+/* Card content positions */
 .card .value {
     position: absolute;
     font-size: 18px;
@@ -60,7 +56,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
 }
 
 .card .center.multiple span {
@@ -68,10 +63,14 @@
     margin: 2px;
 }
 
-.card.hearts .value, .card.hearts .center,
-.card.diamonds .value, .card.diamonds .center {
+
+.card.hearts .value, 
+.card.hearts .center,
+.card.diamonds .value, 
+.card.diamonds .center {
     color: red;
 }
+
 
 #game, .main, .deck {
     text-align: center;
@@ -86,35 +85,37 @@
 }
 
 .deck {
-    border: 10px solid white;
-    border-radius: 20px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 5px;
+    border: 10px solid white;
+    border-radius: 20px;
     background-color: #200303;
     padding: 20px;
 }
+
 
 button {
     margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
     color: white;
+    background-color: rgb(107, 37, 37);
     border: 5px solid rgb(27, 11, 11);
     border-radius: 30px;
     font-weight: bold;
-    background-color: rgb(107, 37, 37);
 }
 
+
 #message {
-    font-size: 60px;
+    font-size: 20px;
     font-weight: bold;
     color: red;
     margin-top: 20px;
 }
 
+
 body {
     color: white;
     background-color: #192e26;
 }
-
